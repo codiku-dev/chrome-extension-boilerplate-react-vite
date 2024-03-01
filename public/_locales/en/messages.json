@@ -1,10 +1,10 @@
 {
   "extensionDescription": {
-    "description": "Extension description",
-    "message": "Chrome extension boilerplate developed with Vite, React and Typescript"
+    "description": "Review Summarizer",
+    "message": "Chrome extension to get a summary of the reviews for a product page"
   },
   "extensionName": {
-    "description": "Extension name",
-    "message": "Chrome extension boilerplate"
+    "description": "Review Summarizer",
+    "message": "Chrome extension to get a summary of the reviews for a product pag"
   }
 }
