@@ -2,6 +2,7 @@ import { createRoot } from 'react-dom/client';
 import App from '@pages/content/ui/app';
 import refreshOnUpdate from 'virtual:reload-on-update-in-view';
 import injectedStyle from './injected.css?inline';
+import { ReviewBlock } from '@root/src/components/ReviewBlock';
 
 refreshOnUpdate('pages/content');
 
@@ -29,3 +30,29 @@ shadowRoot.appendChild(styleElement);
  */
 
 createRoot(rootIntoShadow).render(<App />);
+
+async function go() {
+  const element = await waitForElement('#averageCustomerReviews');
+  console.log('*** element', element);
+  createRoot(rootIntoShadow.querySelector('#averageCustomerReviews')).render(<ReviewBlock />);
+}
+
+go();
+const waitForElement = async (selector, timeout = 30000) => {
+  const startTime = Date.now();
+
+  const poll = resolve => {
+    const element = rootIntoShadow.querySelector(selector);
+    const elapsedTime = Date.now() - startTime;
+
+    if (element) {
+      resolve(element);
+    } else if (elapsedTime < timeout) {
+      setTimeout(() => poll(resolve), 100); // Check every 100ms
+    } else {
+      resolve(null); // Timeout reached without finding the element
+    }
+  };
+
+  return new Promise(poll);
+};

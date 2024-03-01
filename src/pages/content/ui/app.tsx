@@ -1,3 +1,3 @@
 export default function App() {
-  return <div className="">content view</div>;
+  return <div className="text-9xl">content view</div>;
 }
